@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clean Slate Exterior Cleaning</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0d1f3c; --blue: #2a6fd4; --bright-blue: #4d9fff;
+    --light-blue: #4fc3f7; --white: #ffffff; --off-white: #f4f7fb;
+    --gray: #6b7a99; --dark: #0a1628;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--navy); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(13,31,60,0.97); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 68px; border-bottom: 2px solid var(--bright-blue); }
+  .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; letter-spacing: 1px; color: var(--white); }
+  .nav-logo span { color: var(--bright-blue); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--light-blue); }
+  .nav-cta { background: var(--bright-blue); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; padding: 0.5rem 1.4rem; border-radius: 4px; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--light-blue); color: var(--navy); }
+
+  /* HERO */
+  .hero { min-height: 100vh; background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 50%, #0f2d5c 100%); display: flex; align-items: center; padding: 100px 5% 60px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(77,159,255,0.15) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(79,195,247,0.08) 0%, transparent 60%); }
+  .drops { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+  .drop { position: absolute; width: 2px; border-radius: 50%; background: linear-gradient(to bottom, transparent, rgba(79,195,247,0.6)); animation: fall linear infinite; opacity: 0; }
+  @keyframes fall { 0% { transform: translateY(-20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 0.4; } 100% { transform: translateY(110vh); opacity: 0; } }
+  .hero-content { position: relative; max-width: 660px; }
+  .hero-badge { display: inline-block; background: rgba(77,159,255,0.15); border: 1px solid rgba(79,195,247,0.4); color: var(--light-blue); font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 3px; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+  .hero-tagline { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; color: var(--light-blue); margin-bottom: 0.6rem; animation: fadeUp 0.6s 0.15s ease both; }
+  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; text-transform: uppercase; color: var(--white); margin-bottom: 1.2rem; animation: fadeUp 0.6s 0.1s ease both; }
+  .hero h1 .blue { color: var(--bright-blue); }
+  .hero p { font-size: 1.15rem; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 480px; margin-bottom: 2rem; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary { background: var(--bright-blue); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; padding: 0.9rem 2.2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(77,159,255,0.4); display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(77,159,255,0.5); }
+  .btn-outline { background: transparent; color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; padding: 0.9rem 2.2rem; border-radius: 4px; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--light-blue); color: var(--light-blue); }
+  .hero-badges { display: flex; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.4s ease both; }
+  .trust-badge { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.6); font-size: 0.85rem; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* SHARED */
+  .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--bright-blue); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem; }
+  .section-sub { color: var(--gray); font-size: 1rem; margin-bottom: 3rem; }
+
+  /* SERVICES */
+  .services { background: var(--off-white); padding: 5rem 5%; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .service-card { background: white; border-radius: 8px; padding: 2rem 1.8rem; border: 1px solid #e2e8f0; transition: all 0.25s; position: relative; overflow: hidden; }
+  .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 0; background: var(--bright-blue); transition: width 0.3s; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,31,60,0.12); }
+  .service-card:hover::after { width: 100%; }
+  .service-icon { width: 52px; height: 52px; background: linear-gradient(135deg, var(--navy), var(--blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.2rem; }
+  .service-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--navy); margin-bottom: 0.5rem; }
+  .service-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; }
+  .service-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--bright-blue); font-size: 1rem; }
+
+  /* PRICING */
+  .pricing { background: var(--navy); padding: 5rem 5%; position: relative; overflow: hidden; }
+  .pricing::before { content: ''; position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(77,159,255,0.08) 0%, transparent 70%); }
+  .pricing .section-title { color: white; }
+  .pricing .section-sub { color: rgba(255,255,255,0.5); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+  .price-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.8rem; transition: all 0.25s; }
+  .price-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(79,195,247,0.3); }
+  .price-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; color: white; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+  .price-row span:first-child { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+  .price-row .amount { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--light-blue); font-size: 0.95rem; }
+  .bundle-card { background: linear-gradient(135deg, var(--bright-blue), #2a6fd4); border-radius: 8px; padding: 2rem; margin-top: 1.5rem; }
+  .bundle-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.3rem; text-transform: uppercase; color: white; margin-bottom: 0.3rem; }
+  .bundle-card .sub { color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 1.2rem; }
+  .bundle-items { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .bundle-item { background: rgba(255,255,255,0.15); border-radius: 6px; padding: 0.8rem 1.2rem; flex: 1; min-width: 160px; }
+  .bundle-item .name { color: rgba(255,255,255,0.8); font-size: 0.85rem; margin-bottom: 0.2rem; }
+  .bundle-item .price { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; color: white; }
+
+  /* PROCESS */
+  .process { background: var(--off-white); padding: 5rem 5%; }
+  .process-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.2rem; }
+  .process-step { background: white; border-radius: 12px; padding: 1.8rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(13,31,60,0.08); }
+  .process-step-number { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: var(--bright-blue); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; margin-bottom: 1rem; }
+  .process-step h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; text-transform: uppercase; color: var(--navy); margin-bottom: 0.75rem; }
+  .process-step p { color: var(--gray); font-size: 0.95rem; line-height: 1.7; }
+
+  /* WHY US */
+  .why { background: white; padding: 5rem 5%; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .why-points { display: flex; flex-direction: column; gap: 1.5rem; }
+  .why-point { display: flex; gap: 1.2rem; }
+  .why-icon { width: 44px; height: 44px; flex-shrink: 0; background: rgba(77,159,255,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .why-point h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05rem; text-transform: uppercase; color: var(--navy); margin-bottom: 0.2rem; }
+  .why-point p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
+  .why-visual { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); border-radius: 12px; padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .stat-row { display: flex; gap: 1.5rem; }
+  .stat { flex: 1; background: rgba(255,255,255,0.08); border-radius: 8px; padding: 1.5rem; text-align: center; }
+  .stat .number { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.5rem; color: var(--light-blue); line-height: 1; }
+  .stat .label { color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* QUOTE FORM */
+  .form-section { background: var(--off-white); padding: 5rem 5%; }
+  .form-wrap { max-width: 700px; margin: 0 auto; background: white; border-radius: 12px; padding: 2.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 30px rgba(13,31,60,0.07); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); }
+  .form-group input, .form-group select, .form-group textarea { padding: 0.85rem 1rem; border: 2px solid #e2e8f0; border-radius: 6px; font-family: 'Barlow', sans-serif; font-size: 0.95rem; color: var(--navy); background: var(--off-white); transition: border-color 0.2s, background 0.2s; outline: none; width: 100%; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--bright-blue); background: white; }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit { margin-top: 1.2rem; width: 100%; background: var(--bright-blue); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 1px; text-transform: uppercase; padding: 1rem; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(77,159,255,0.3); }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(77,159,255,0.45); }
+  .form-success { display: none; text-align: center; padding: 2rem 1rem; }
+  .form-success .check { font-size: 3.5rem; margin-bottom: 1rem; }
+  .form-success h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem; }
+  .form-success p { color: var(--gray); line-height: 1.7; }
+
+  /* CONTACT */
+  .contact { background: linear-gradient(135deg, var(--dark), var(--navy)); padding: 5rem 5%; text-align: center; position: relative; overflow: hidden; }
+  .contact::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(77,159,255,0.12) 0%, transparent 70%); }
+  .contact .section-label { color: var(--light-blue); }
+  .contact .section-title { color: white; margin-bottom: 0.5rem; }
+  .contact > p { color: rgba(255,255,255,0.6); margin-bottom: 2.5rem; font-size: 1.05rem; position: relative; }
+  .contact-options { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; position: relative; }
+  .contact-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 2rem 2.5rem; min-width: 220px; transition: all 0.25s; }
+  .contact-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(79,195,247,0.3); }
+  .contact-card .icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .contact-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.3rem; }
+  .contact-card a, .contact-card .val { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; color: white; text-decoration: none; display: block; }
+  .contact-card a:hover { color: var(--light-blue); }
+  .free-quote-cta { margin-top: 3rem; position: relative; }
+  .free-quote-cta p { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: white; margin-bottom: 1rem; }
+  .free-quote-cta .free { color: var(--light-blue); }
+
+  /* MAP */
+  .map-section { background: var(--off-white); padding: 5rem 5%; }
+  .map-inner { display: grid; grid-template-columns: 1fr 1.8fr; gap: 2rem; align-items: stretch; max-width: 1200px; margin: 0 auto; }
+  .map-info { background: white; border-radius: 18px; padding: 2.5rem; border: 1px solid #e8eff7; box-shadow: 0 18px 40px rgba(13,31,60,0.08); display: flex; flex-direction: column; justify-content: center; }
+  .map-info h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; text-transform: uppercase; color: var(--navy); margin-bottom: 0.75rem; }
+  .map-info p { color: var(--gray); font-size: 0.98rem; line-height: 1.8; margin-bottom: 1.75rem; max-width: 520px; }
+  .area-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .area-tag { background: rgba(77,159,255,0.12); color: var(--navy); border: 1px solid rgba(77,159,255,0.25); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.84rem; letter-spacing: 1px; text-transform: uppercase; padding: 0.45rem 1rem; border-radius: 999px; }
+  .map-embed { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 18px 40px rgba(13,31,60,0.08); border: 1px solid #e8eff7; min-height: 420px; }
+  .map-embed::before { content: 'Halton Region Service Area'; position: absolute; top: 1rem; left: 1rem; background: rgba(255,255,255,0.92); color: var(--navy); font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; letter-spacing: 1px; padding: 0.5rem 0.9rem; border-radius: 999px; z-index: 1; }
+  .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+
+  @media (max-width: 768px) {
+    .map-section { padding: 3rem 2rem; }
+    .map-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .map-info { border-radius: 14px; padding: 2rem; }
+    .map-info p { max-width: 100%; }
+    .area-tags { justify-content: center; }
+    .map-embed { min-height: 280px; }
+    .map-embed::before { left: 50%; transform: translateX(-50%); }
+    .process { padding: 3rem 2rem; }
+    .process-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .process-step { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; }
+    .process-step-number { min-width: 44px; height: 44px; margin-bottom: 0; margin-top: 0.1rem; }
+    .process-step h4 { margin-bottom: 0.4rem; }
+    .process-step p { margin: 0; }
+  }
+
+  /* FOOTER */
+  footer { background: var(--dark); padding: 1.5rem 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  footer .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.2rem; color: white; }
+  footer .logo span { color: var(--bright-blue); }
+  footer p { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+  footer .footer-social { color: rgba(255,255,255,0.9); font-size: 0.95rem; font-weight: 700; }
+  footer .footer-social a { color: var(--bright-blue); text-decoration: none; }
+  footer .footer-social a:hover { color: var(--light-blue); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes scaleUp { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+  
+  .scroll-animate { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+  .scroll-animate.slide-left { animation: slideInLeft 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+  .scroll-animate.slide-right { animation: slideInRight 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+  .scroll-animate.scale { animation: scaleUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+  
+  /* MOBILE STICKY CTA */
+  .mobile-sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, var(--bright-blue), #2a6fd4); padding: 0.8rem 1rem; z-index: 99; box-shadow: 0 -4px 20px rgba(13,31,60,0.15); }
+  .mobile-sticky-cta a { display: block; background: rgba(255,255,255,0.2); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; padding: 0.9rem 1rem; border-radius: 6px; text-decoration: none; text-align: center; transition: all 0.2s; border: none; cursor: pointer; }
+  .mobile-sticky-cta a:active { transform: scale(0.98); }
+
+  @media (max-width: 768px) {
+    .mobile-sticky-cta { display: block; }
+    .nav-links { display: none; }
+    .why-grid, .map-inner { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .form-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    body { padding-bottom: 70px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">CLEAN<span>SLATE</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#quote">Get a Quote</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#quote" class="nav-cta">Free Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="drops" id="drops"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⚡ Licensed &amp; Insured — Satisfaction Guaranteed</div>
+    <h1>CLEAN<br><span class="blue">SLATE</span><br>EXTERIOR</h1>
+    <p>Professional power washing for driveways, patios, walkways, and windows. Proudly serving the Halton Region — fast, reliable, and done right.</p>
+    <div class="hero-actions">
+      <a href="#quote" class="btn-primary">📋 Get a Free Quote</a>
+      <a href="#pricing" class="btn-outline">View Pricing</a>
+    </div>
+    <div class="hero-badges">
+      <div class="trust-badge"><span>🛡️</span> Licensed &amp; Insured</div>
+      <div class="trust-badge"><span>⏱️</span> Reliable &amp; On Time</div>
+      <div class="trust-badge"><span>✨</span> Satisfaction Guaranteed</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What We Do</div>
+  <div class="section-title">Our Services</div>
+  <p class="section-sub">Everything your home's exterior needs — in one visit.</p>
+  <div class="services-grid">
+    <div class="service-card scroll-animate">
+      <div class="service-icon">🏠</div>
+      <h3>Driveway Cleaning</h3>
+      <p>Blast away oil stains, tire marks, dirt, and grime. Makes your driveway look brand new.</p>
+      <div class="service-price">$80 – $200+</div>
+    </div>
+    <div class="service-card scroll-animate">
+      <div class="service-icon">☀️</div>
+      <h3>Patio / Backyard</h3>
+      <p>Restore your outdoor living space. Perfect before summer gatherings or putting your home on the market.</p>
+      <div class="service-price">$80 – $200+</div>
+    </div>
+    <div class="service-card scroll-animate">
+      <div class="service-icon">🚶</div>
+      <h3>Walkways</h3>
+      <p>Clean, safe walkways add instant curb appeal. Great as a standalone or bundle add-on.</p>
+      <div class="service-price">$40 – $80</div>
+    </div>
+    <div class="service-card scroll-animate">
+      <div class="service-icon">🪟</div>
+      <h3>Window Cleaning</h3>
+      <p>Crystal-clear windows inside and out. Front-only or whole-house options available.</p>
+      <div class="service-price">$40 – $150</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label" style="color:var(--light-blue);">Transparent Pricing</div>
+  <div class="section-title">Pricing Guide</div>
+  <p class="section-sub">No surprises. Fair rates based on job size.</p>
+  <div class="pricing-grid">
+    <div class="price-card scroll-animate">
+      <h3>🏠 Driveway Cleaning</h3>
+      <div class="price-row"><span>Small (1 Car)</span><span class="amount">$80 – $100</span></div>
+      <div class="price-row"><span>Medium (2 Car)</span><span class="amount">$120 – $150</span></div>
+      <div class="price-row"><span>Large (3+ Car)</span><span class="amount">$150 – $200+</span></div>
+    </div>
+    <div class="price-card scroll-animate">
+      <h3>☀️ Patio / Backyard</h3>
+      <div class="price-row"><span>Small</span><span class="amount">$80 – $120</span></div>
+      <div class="price-row"><span>Medium</span><span class="amount">$120 – $180</span></div>
+      <div class="price-row"><span>Large</span><span class="amount">$200+</span></div>
+    </div>
+    <div class="price-card scroll-animate">
+      <h3>🚶 Walkways</h3>
+      <div class="price-row"><span>Add-On</span><span class="amount">$40 – $80</span></div>
+    </div>
+    <div class="price-card scroll-animate">
+      <h3>🪟 Window Cleaning</h3>
+      <div class="price-row"><span>Front Only</span><span class="amount">$40 – $60</span></div>
+      <div class="price-row"><span>Whole House</span><span class="amount">$80 – $150</span></div>
+    </div>
+  </div>
+  <div class="bundle-card">
+    <h3>🏷️ Bundle &amp; Save!</h3>
+    <p class="sub">Combine services and get a better deal — bundles can be customized to fit your home.</p>
+    <div class="bundle-items">
+      <div class="bundle-item"><div class="name">Driveway + Walkway</div><div class="price">$140</div></div>
+      <div class="bundle-item"><div class="name">Driveway + Patio</div><div class="price">$220</div></div>
+      <div class="bundle-item"><div class="name">Full Exterior + Windows</div><div class="price">$260</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-label">How It Works</div>
+  <div class="section-title">Simple, Straightforward Service</div>
+  <p class="section-sub">A quick 4-step process that makes booking and cleaning easy for your home.</p>
+  <div class="process-grid">
+    <div class="process-step scroll-animate">
+      <div class="process-step-number">1</div>
+      <h4>Request a Quote</h4>
+      <p>Send your details through the form, call, or email. We'll review your needs and reply fast.</p>
+    </div>
+    <div class="process-step scroll-animate">
+      <div class="process-step-number">2</div>
+      <h4>We Give a Price</h4>
+      <p>You receive a clear, no-surprise estimate. We keep pricing honest and easy to understand.</p>
+    </div>
+    <div class="process-step scroll-animate">
+      <div class="process-step-number">3</div>
+      <h4>We Show Up & Clean</h4>
+      <p>Our team arrives on time, works efficiently, and leaves your exterior looking refreshed.</p>
+    </div>
+    <div class="process-step scroll-animate">
+      <div class="process-step-number">4</div>
+      <h4>You Enjoy</h4>
+      <p>Relax and enjoy the new look of your driveway, patio, walkways, and windows.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="section-label">Why Choose Us</div>
+  <div class="section-title">The Clean Slate Difference</div>
+  <p class="section-sub">We don't just clean — we care about the results.</p>
+  <div class="why-grid">
+    <div class="why-points">
+      <div class="why-point scroll-animate slide-left">
+        <div class="why-icon">🛡️</div>
+        <div><h4>Licensed &amp; Insured</h4><p>You're fully protected. We carry proper licensing and insurance on every job, giving you total peace of mind.</p></div>
+      </div>
+      <div class="why-point scroll-animate slide-left">
+        <div class="why-icon">⏱️</div>
+        <div><h4>Reliable &amp; On Time</h4><p>We show up when we say we will. Your time is valuable — no waiting around, no no-shows.</p></div>
+      </div>
+      <div class="why-point scroll-animate slide-left">
+        <div class="why-icon">✨</div>
+        <div><h4>Satisfaction Guaranteed</h4><p>We focus on quality and take the time to do it right. The results last way longer than a rushed job.</p></div>
+      </div>
+      <div class="why-point scroll-animate slide-left">
+        <div class="why-icon">💬</div>
+        <div><h4>Quick &amp; Easy Quotes</h4><p>Text or call for a fast, free quote. We'll give you a fair, transparent price on the spot.</p></div>
+      </div>
+    </div>
+    <div class="why-visual scroll-animate slide-right">
+      <div class="stat-row">
+        <div class="stat"><div class="number">100%</div><div class="label">Satisfaction Rate</div></div>
+        <div class="stat"><div class="number">5★</div><div class="label">Customer Rating</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="number">Fast</div><div class="label">Same-Week Scheduling</div></div>
+        <div class="stat"><div class="number">FREE</div><div class="label">No-Obligation Quote</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section class="form-section" id="quote">
+  <div class="section-label">Request a Quote</div>
+  <div class="section-title">Get Your Free Quote</div>
+  <p class="section-sub">Fill in the form and we'll get back to you fast — usually the same day.</p>
+  <div class="form-wrap">
+    <form id="quote-form" onsubmit="submitForm(event)">
+      <input type="hidden" name="_subject" value="New Clean Slate Exterior Quote Request" />
+      <div id="formContent">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="John" />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Smith" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="905-000-0000" />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label>City / Town</label>
+            <input type="text" id="city" name="city" placeholder="Oakville" />
+          </div>
+          <div class="form-group full">
+            <label>Service Needed</label>
+            <select id="service" name="service">
+              <option value="">— Select a service —</option>
+              <option>Driveway Cleaning</option>
+              <option>Patio / Backyard</option>
+              <option>Walkways</option>
+              <option>Window Cleaning</option>
+              <option>Bundle — Driveway + Walkway ($140)</option>
+              <option>Bundle — Driveway + Patio ($220)</option>
+              <option>Bundle — Full Exterior + Windows ($260)</option>
+              <option>Not sure — I'd like a recommendation</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Additional Details (optional)</label>
+            <textarea id="details" name="details" placeholder="e.g. 2-car driveway, large patio, any tough stains we should know about..."></textarea>
+          </div>
+        </div>
+        <button class="form-submit" type="submit">📋 Send My Quote Request</button>
+      </div>
+    </form>
+    <div class="form-success" id="formSuccess">
+      <div class="check">✅</div>
+      <h3>Quote Request Sent!</h3>
+      <p>Thanks! We'll be in touch shortly with your free quote.<br><br>You can also reach us directly at <strong><a href="tel:+14166057601" style="color:var(--bright-blue);">416-605-7601</a></strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Get In Touch</div>
+  <div class="section-title">Text or Call for an <span style="color:var(--light-blue);">INSTANT</span> FREE Quote!</div>
+  <p>We're already in your area. Spring/Summer bookings filling up fast — <strong>get an instant quote in seconds</strong> — reach out today!</p>
+  <div class="contact-options">
+    <div class="contact-card">
+      <div class="icon">📱</div>
+      <h4>Text or Call</h4>
+      <a href="tel:+14166057601">416-605-7601</a>
+    </div>
+    <div class="contact-card">
+      <div class="icon">✉️</div>
+      <h4>Email</h4>
+      <a href="mailto:cleanslatexterior@gmail.com">cleanslatexterior@gmail.com</a>
+    </div>
+    <div class="contact-card">
+      <div class="icon">📍</div>
+      <h4>Service Area</h4>
+      <span class="val">Halton Region &amp; Surrounding Areas</span>
+    </div>
+  </div>
+  <div class="free-quote-cta">
+    <p>Ready to impress your neighbours? Get your <span class="free">INSTANT FREE</span> quote in seconds.</p>
+    <a href="tel:+14166057601" class="btn-primary" style="font-size:1.2rem;padding:1rem 2.8rem;">📞 Call Now — Instant Quote • It's Free</a>
+  </div>
+</section>
+
+<!-- SERVICE MAP -->
+<section class="map-section" id="area">
+  <div class="section-label">Service Area</div>
+  <div class="section-title">Halton Region Coverage</div>
+  <p class="section-sub">Proudly serving homes across the Halton Region and nearby communities.</p>
+  <div class="map-inner">
+    <div class="map-info">
+      <h3>Where we work</h3>
+      <p>We cover Oakville, Burlington, Milton, Halton Hills, Georgetown, Acton and surrounding areas — keeping your exterior clean and fresh.</p>
+      <div class="area-tags">
+        <span class="area-tag">Oakville</span>
+        <span class="area-tag">Burlington</span>
+        <span class="area-tag">Milton</span>
+        <span class="area-tag">Halton Hills</span>
+        <span class="area-tag">Georgetown</span>
+        <span class="area-tag">Acton</span>
+        <span class="area-tag">Surrounding Areas</span>
+      </div>
+    </div>
+    <div class="map-embed">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d111621.71337712123!2d-80.10749834454481!3d43.41011265921074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b61867dc6b859%3A0x8874aeec1c713db1!2sHalton%20Region%2C%20ON!5e0!3m2!1sen!2sca!4v1710000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">CLEAN<span>SLATE</span> EXTERIOR CLEANING</div>
+  <p class="footer-social">Follow us on Instagram for updates and before/after results: <a href="https://www.instagram.com/cleanslateexteriorco" target="_blank" rel="noreferrer">@cleanslateexteriorco</a></p>
+  <p>Clean Today. Impress Tomorrow.</p>
+  <p>© 2026 Clean Slate Exterior Cleaning. All rights reserved.</p>
+</footer>
+
+<script>
+  // Smooth scroll animations with IntersectionObserver
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('scroll-animate');
+          observer.unobserve(entry.target);
+        }, index * 80);
+      }
+    });
+  }, observerOptions);
+  
+  document.querySelectorAll('.service-card, .price-card, .process-step, .why-point, .why-visual, .contact-card').forEach(el => {
+    if (!el.classList.contains('bundle-card')) {
+      el.classList.remove('scroll-animate');
+      observer.observe(el);
+    }
+  });
+
+  // Animated water drops
+  const container = document.getElementById('drops');
+  for (let i = 0; i < 30; i++) {
+    const drop = document.createElement('div');
+    drop.className = 'drop';
+    drop.style.cssText = `left:${Math.random()*100}%;height:${Math.random()*60+20}px;width:${Math.random()*1.5+1}px;animation-duration:${Math.random()*3+2}s;animation-delay:${Math.random()*4}s;opacity:0;`;
+    container.appendChild(drop);
+  }
+
+  // Form submit
+  function submitForm(event) {
+    event.preventDefault();
+    const first = document.getElementById('firstName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!first || !phone) {
+      alert('Please enter at least your name and phone number so we can reach you!');
+      return;
+    }
+
+    const form = document.getElementById('quote-form');
+    const formData = new FormData(form);
+
+    fetch('https://formspree.io/f/mjglykev', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+      .then((response) => {
+        if (response.ok) {
+          document.getElementById('formContent').style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          return response.json().then((data) => {
+            throw new Error(data.error || 'Form submission failed. Please try again.');
+          });
+        }
+      })
+      .catch((error) => {
+        alert(error.message || 'There was a problem sending your quote request. Please try again.');
+      });
+  }
+</script>
+
+<!-- MOBILE STICKY CTA -->
+<div class="mobile-sticky-cta">
+  <a href="tel:+14166057601">💬 Text Now — Instant Quote</a>
+</div>
+
+</body>
+</html>
